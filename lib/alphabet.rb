@@ -3,10 +3,6 @@ class Alphabet
   attr_reader :elements
 
   def initialize
-    @elements = ("a".."z").to_a
-  end
-
-  def add_space
-    @elements << " "
+    @elements = ("a".."z").to_a << " "
   end
 end

@@ -11,18 +11,8 @@ RSpec.describe Alphabet do
     it 'has an alphabet upon instantiation' do
       alpha = Alphabet.new
 
-      expect(alpha.elements.length).to eq(26)
-      expect(alpha.elements.class).to eq(Array)
-    end
-  end
-
-  context "methods" do
-    it "can add a space to elements" do
-      alpha = Alphabet.new
-
-      alpha.add_space
-
       expect(alpha.elements.length).to eq(27)
+      expect(alpha.elements.class).to eq(Array)
     end
   end
 end
