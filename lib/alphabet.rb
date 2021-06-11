@@ -8,6 +8,5 @@ class Alphabet
 
   def add_space
     @elements << " "
-    require "pry"; binding.pry
   end
 end
