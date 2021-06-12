@@ -25,7 +25,7 @@ RSpec.describe Offset do
 
     it 'can display the date in form of day, month, year' do
       offset = Offset.new
-      allow(offset).to receive(:new).and_return("110621")
+      allow(offset).to receive(:date).and_return("110621")
 
       expect(offset.date).to eq("110621")
     end
@@ -34,7 +34,7 @@ RSpec.describe Offset do
   context 'methods' do
     it 'can square the date' do
       offset = Offset.new
-      allow(offset).to receive(:new).and_return("110621")
+      allow(offset).to receive(:date).and_return("110621")
 
       expect(offset.square_date).to eq(12237005641)
     end
