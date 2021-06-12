@@ -1,11 +1,10 @@
 
 class Offset
-  attr_reader :values, :key, :date
+  attr_reader :key, :date
 
-  def initialize
-    @values = ("0".."9").to_a * 5
-    @key = values.sample(5)
-    @date = Time.new.strftime("%d%m%y")
+  def initialize(key, date)
+    @key = key
+    @date = date
   end
 
   def square_date
@@ -18,23 +17,38 @@ class Offset
     x = integers[-4..-1]
   end
 
+  def grouped_key
+    @key.chars
+  end
+
   def a_key
-    num = @key[0..1].join
-    num.rjust(0).to_i + last_four_digits[0]
+    num = grouped_key[0..1].join
+    x = num.rjust(0).to_i + last_four_digits[0]
+    return (x % 27) if x > 27
+    x
   end
 
   def b_key
-    num = @key[1..2].join
-    num.rjust(0).to_i + last_four_digits[1]
+    num = grouped_key[1..2].join
+    x = num.rjust(0).to_i + last_four_digits[1]
+    return (x % 27) if x > 27
+    x
   end
 
   def c_key
-    num = @key[2..3].join
-    num.rjust(0).to_i + last_four_digits[2]
+    num = grouped_key[2..3].join
+    x = num.rjust(0).to_i + last_four_digits[2]
+    return (x % 27) if x > 27
+    x
   end
 
   def d_key
-    num = @key[3..4].join
-    num.rjust(0).to_i + last_four_digits[3]
+    num = grouped_key[3..4].join
+    x = num.rjust(0).to_i + last_four_digits[3]
+    return (x % 27) if x > 27
+    x
   end
 end
+
+# = (("0".."9").to_a * 5).sample(5)
+# = Time.new.strftime("%d%m%y")
