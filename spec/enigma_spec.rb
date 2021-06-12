@@ -9,7 +9,31 @@ RSpec.describe Enigma do
     end
 
     it 'has a file path' do
+      enigma = Enigma.new('./message.txt')
 
+      expect(enigma.file_path).to eq('./message.txt')
+    end
+  end
+
+  context 'methods' do
+    it 'can read files' do
+      enigma = Enigma.new('./message.txt')
+
+      expected = 'Matt Ryan'
+
+      expect(enigma.message).to eq(expected)
+    end
+
+    it 'can show encrypted text and key/date' do
+      enigma = Enigma.new('./message.txt')
+
+      expected = {
+        encryption: 'tcdlgtitu',
+        key: "02345",
+        date: "110621"
+      }
+
+      expect(enigma.encrypt).to eq(expected)
     end
   end
 end
