@@ -11,7 +11,7 @@ RSpec.describe Encryption do
     it 'has attributes' do
       encrypt = Encryption.new("Matt Ryan")
 
-      expect(encrypt.message).to eq("Matt Ryan")
+      expect(encrypt.message).to eq("matt ryan")
       expect(encrypt.offset).to be_an_instance_of(Offset)
       expect(encrypt.elements.class).to eq(Array)
     end
@@ -21,9 +21,17 @@ RSpec.describe Encryption do
     it 'can put message into an array' do
       encrypt = Encryption.new("Matt Ryan")
 
-      expected = ['M', 'a', 't', 't', ' ', 'R', 'y', 'a', 'n']
+      expected = ['m', 'a', 't', 't', ' ', 'r', 'y', 'a', 'n']
 
       expect(encrypt.transform_message).to eq(expected)
+    end
+
+    it 'can shift the alphabet' do
+      encrypt = Encryption.new("Matt Ryan")
+
+      expected = ["c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " ", "a", "b"]
+
+      expect(encrypt.shift(2)).to eq(expected)
     end
   end
 end
