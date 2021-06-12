@@ -50,10 +50,24 @@ RSpec.describe Encryption do
     it 'can shift every char and replace it with a new one' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
+      encrypt2 = Encryption.new("Hello World!", offset)
 
       expected = ["t", "c", "d", "l", "g", "t", "i", "t", "u"]
 
       expect(encrypt.encrypt).to eq(expected)
+
+      # expected2 = ["o", "g", "w", "d", "v", "b", "g", "g", "y", "n", "!"]
+      #
+      # expect(encrypt2.encrypt).to eq(expected2)
+    end
+
+    it 'can convert encryption to a string' do
+      offset = Offset.new("02345", "110621")
+      encrypt = Encryption.new("Matt Ryan", offset)
+
+      expected = 'tcdlgtitu'
+
+      expect(encrypt.message_encrypted).to eq(expected)
     end
   end
 end

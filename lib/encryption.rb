@@ -41,4 +41,8 @@ class Encryption
     end
     array
   end
+
+  def message_encrypted
+    encrypt.join
+  end
 end
