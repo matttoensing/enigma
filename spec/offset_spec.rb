@@ -32,18 +32,32 @@ RSpec.describe Offset do
   end
 
   context 'methods' do
+    it 'can square the date' do
+      offset = Offset.new
+      allow(offset).to receive(:new).and_return("110621")
+
+      expect(offset.square_date).to eq(12237005641)
+    end
+
+    it 'can take the last 4 digits of the square date number' do
+      offset = Offset.new
+      allow(offset).to receive(:new).and_return("110621")
+
+      expect(offset.last_four_digits).to eq([5, 6, 4, 1])
+    end
+
     it 'can create the A key' do
       offset = Offset.new
-      allow(offset).to receive(:a_key).and_return(03)
+      allow(offset).to receive(:a_key).and_return(8)
 
-      expect(offset.a_key).to eq(03)
+      expect(offset.a_key).to eq(8)
     end
 
     it 'can create the B key' do
       offset = Offset.new
-      allow(offset).to receive(:b_key).and_return(35)
+      allow(offset).to receive(:b_key).and_return(41)
 
-      expect(offset.b_key).to eq(35)
+      expect(offset.b_key).to eq(41)
     end
 
     it 'can create the C key' do
@@ -58,20 +72,6 @@ RSpec.describe Offset do
       allow(offset).to receive(:d_key).and_return(84)
 
       expect(offset.d_key).to eq(84)
-    end
-
-    it 'can square the date' do
-      offset = Offset.new
-      allow(offset).to receive(:new).and_return("110621")
-
-      expect(offset.square_date).to eq(12237005641)
-    end
-
-    it 'can take the last 4 digits of the square date number' do
-      offset = Offset.new
-      allow(offset).to receive(:new).and_return("110621")
-
-      expect(offset.last_four_digits).to eq([5, 6, 4, 1])
     end
   end
 end
