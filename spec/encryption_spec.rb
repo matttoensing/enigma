@@ -31,15 +31,6 @@ RSpec.describe Encryption do
       expect(encrypt.split).to eq(expected)
     end
 
-    # xit 'can map each character in message to alphabet position' do
-    #   offset = Offset.new("02345", "110621")
-    #   encrypt = Encryption.new("Matt Ryan", offset)
-    #
-    #   expected = [12, 0, 19, 19, 26, 17, 24, 0, 13]
-    #
-    #   expect(encrypt.number_values).to eq(expected)
-    # end
-
     it 'can shift the alphabet' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
@@ -49,8 +40,20 @@ RSpec.describe Encryption do
       expect(encrypt.shift(2)).to eq(expected)
     end
 
-    it 'can' do
+    it 'can create a new index to select a chara character for elements' do
+      offset = Offset.new("02345", "110621")
+      encrypt = Encryption.new("Matt Ryan", offset)
 
+      expect(encrypt.update(2, 30)).to eq(5)
+    end
+
+    it 'can shift every char and replace it with a new one' do
+      offset = Offset.new("02345", "110621")
+      encrypt = Encryption.new("Matt Ryan", offset)
+
+      expected = ["t", "c", "d", "l", "g", "t", "i", "t", "u"]
+
+      expect(encrypt.encrypt).to eq(expected)
     end
   end
 end
