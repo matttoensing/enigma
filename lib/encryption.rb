@@ -2,9 +2,9 @@
 class Encryption
   attr_reader :message, :offset, :elements
 
-  def initialize(message)
+  def initialize(message, offset)
     @message = message.downcase.chars
-    @offset = Offset.new
+    @offset = offset
     @elements = ("a".."z").to_a << " "
   end
 
@@ -12,15 +12,7 @@ class Encryption
     @message.each_slice(4).to_a
   end
 
-  def number_values
-    @elements.each do |element|
-      @message.map do |char|
-        element.index if element == char
-      end
-    end
-  end
-
-  def shift(offset)
-    @elements.rotate(offset)
+  def shift(value)
+    @elements.rotate(value)
   end
 end
