@@ -23,22 +23,30 @@ class Offset
 
   def a_key
     num = grouped_key[0..1].join
-    num.rjust(0).to_i + last_four_digits[0]
+    x = num.rjust(0).to_i + last_four_digits[0]
+    return (x % 27) if x > 27
+    x
   end
 
   def b_key
     num = grouped_key[1..2].join
-    num.rjust(0).to_i + last_four_digits[1]
+    x = num.rjust(0).to_i + last_four_digits[1]
+    return (x % 27) if x > 27
+    x
   end
 
   def c_key
     num = grouped_key[2..3].join
-    num.rjust(0).to_i + last_four_digits[2]
+    x = num.rjust(0).to_i + last_four_digits[2]
+    return (x % 27) if x > 27
+    x
   end
 
   def d_key
     num = grouped_key[3..4].join
-    num.rjust(0).to_i + last_four_digits[3]
+    x = num.rjust(0).to_i + last_four_digits[3]
+    return (x % 27) if x > 27
+    x
   end
 end
 

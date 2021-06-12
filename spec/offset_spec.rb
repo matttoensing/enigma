@@ -46,19 +46,19 @@ RSpec.describe Offset do
     it 'can create the B key' do
       offset = Offset.new("02345", "110621")
 
-      expect(offset.b_key).to eq(29)
+      expect(offset.b_key).to eq(2)
     end
 
     it 'can create the C key' do
       offset = Offset.new("02345", "110621")
 
-      expect(offset.c_key).to eq(38)
+      expect(offset.c_key).to eq(11)
     end
 
     it 'can create the D key' do
       offset = Offset.new("02345", "110621")
 
-      expect(offset.d_key).to eq(46)
+      expect(offset.d_key).to eq(19)
     end
   end
 end
