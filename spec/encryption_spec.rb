@@ -11,19 +11,29 @@ RSpec.describe Encryption do
     it 'has attributes' do
       encrypt = Encryption.new("Matt Ryan")
 
-      expect(encrypt.message).to eq("matt ryan")
+      expected = ['m', 'a', 't', 't', ' ', 'r', 'y', 'a', 'n']
+
+      expect(encrypt.message).to eq(expected)
       expect(encrypt.offset).to be_an_instance_of(Offset)
       expect(encrypt.elements.class).to eq(Array)
     end
   end
 
   context 'methods' do
-    it 'can put message into an array' do
+    it 'can split the message into sub arrays' do
       encrypt = Encryption.new("Matt Ryan")
 
-      expected = ['m', 'a', 't', 't', ' ', 'r', 'y', 'a', 'n']
+      expected = [['m', 'a', 't', 't'], [' ', 'r', 'y', 'a'], ['n']]
 
-      expect(encrypt.transform_message).to eq(expected)
+      expect(encrypt.split).to eq(expected)
+    end
+
+    it 'can map each character in message to alphabet position' do
+      encrypt = Encryption.new("Matt Ryan")
+
+      expected = [12, 0, 19, 19, 26, 17, 24, 0, 13]
+
+      expect(encrypt.number_values).to eq(expected)
     end
 
     it 'can shift the alphabet' do
