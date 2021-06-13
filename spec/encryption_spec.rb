@@ -18,6 +18,7 @@ RSpec.describe Encryption do
       expect(encrypt.message).to eq(expected)
       expect(encrypt.offset).to be_an_instance_of(Offset)
       expect(encrypt.elements.class).to eq(Array)
+      expect(encrypt.elements.length).to eq(27)
     end
   end
 
@@ -47,27 +48,30 @@ RSpec.describe Encryption do
       expect(encrypt.update(2, 30)).to eq(5)
     end
 
+    it 'can find a character in alphabet with 2 indexes' do
+      offset = Offset.new("02345", "110621")
+      encrypt = Encryption.new("Matt Ryan", offset)
+
+      expect(encrypt.character(0, 2)).to eq("j")
+    end
+
     it 'can shift every char and replace it with a new one' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
-      encrypt2 = Encryption.new("Hello World!", offset)
 
-      expected = ["t", "c", "d", "l", "g", "t", "i", "t", "u"]
+      expected = "tcdlgtitu"
 
       expect(encrypt.encrypt).to eq(expected)
-
-      # expected2 = ["o", "g", "w", "d", "v", "b", "g", "g", "y", "n", "!"]
-      #
-      # expect(encrypt2.encrypt).to eq(expected2)
     end
 
-    it 'can convert encryption to a string' do
+    it 'will not replace a character in message if it is not found in alphabet' do
       offset = Offset.new("02345", "110621")
-      encrypt = Encryption.new("Matt Ryan", offset)
+      encrypt = Encryption.new("Hello World!", offset)
 
-      expected = 'tcdlgtitu'
 
-      expect(encrypt.message_encrypted).to eq(expected)
+      expected = "ogwdvbggyno!"
+
+      expect(encrypt.encrypt).to eq(expected)
     end
   end
 end
