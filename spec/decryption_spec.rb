@@ -53,7 +53,16 @@ RSpec.describe Decryption do
       offset = Offset.new("02345", "110621")
       decrypt = Decryption.new('tcdlgtitu', offset)
 
-      expect(decrypt.character(0, 12)).to eq('m')
+      expect(decrypt.character(0, 19)).to eq('m')
+    end
+
+    it 'can decrypt a message' do
+      offset = Offset.new("02345", "110621")
+      decrypt = Decryption.new('tcdlgtitu', offset)
+
+      expected = "matt ryan"
+
+      expect(decrypt.decrypt).to eq(expected)
     end
   end
 end
