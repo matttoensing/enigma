@@ -8,7 +8,7 @@ class Decryption
     @elements = ("a".."z").to_a << " "
   end
 
-  def group
+  def grouped
     @encryped_message.each_slice(4).to_a
   end
 
@@ -32,5 +32,21 @@ class Decryption
     elsif index1 == 3
       @elements[update_index_value(index2, offset.d_key)]
     end
+  end
+
+  def decrypt
+    array = []
+    grouped.each do |groups|
+      groups.each_with_index do |char, index1|
+        if @elements.include?(char)
+          @elements.each_with_index do |element, index2|
+            array << character(index1, index2) if char == element
+          end
+        else
+          array << char
+        end
+      end
+    end
+    array.join
   end
 end
