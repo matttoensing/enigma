@@ -64,5 +64,14 @@ RSpec.describe Decryption do
 
       expect(decrypt.decrypt).to eq(expected)
     end
+
+    it 'can decrypt a message with a character not included in alphabet' do
+      offset = Offset.new("02345", "110621")
+      decrypt = Decryption.new("ogwdvbggyno!", offset)
+
+      expected = "hello world!"
+
+      expect(decrypt.decrypt).to eq(expected)
+    end
   end
 end
