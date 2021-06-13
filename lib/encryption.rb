@@ -47,6 +47,10 @@ class Encryption
         end
       end
     end
-    array.join
+    array
+  end
+
+  def message_encrypted
+    encrypt.join
   end
 end
