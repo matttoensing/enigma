@@ -29,7 +29,7 @@ RSpec.describe Decryption do
 
       expected = [['t', 'c', 'd', 'l'], ['g', 't', 'i', 't'], ['u']]
 
-      expect(decrypt.group).to eq(expected)
+      expect(decrypt.grouped).to eq(expected)
     end
 
     it "can shift the alphabet by a given number" do
