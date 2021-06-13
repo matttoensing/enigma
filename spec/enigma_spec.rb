@@ -19,7 +19,7 @@ RSpec.describe Enigma do
     it 'can read files' do
       enigma = Enigma.new('./message.txt')
 
-      expected = 'Matt Ryan'
+      expected = "Matt Ryan\n"
 
       expect(enigma.message).to eq(expected)
     end
