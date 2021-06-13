@@ -9,8 +9,9 @@ class Enigma
   end
 
   def message
-    holder = File.open(@file_path)
+    holder = File.open(ARGV[0], 'r')
     incoming_message = holder.read
+    holder.close
   end
 
   def encrypt
