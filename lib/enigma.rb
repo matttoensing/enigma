@@ -15,7 +15,7 @@ class Enigma
 
   def encrypt
     {
-      encryption: @encryption.message_encrypted,
+      encryption: @encryption.message_encrypted.strip,
       key: @offset.key,
       date: @offset.date
     }
