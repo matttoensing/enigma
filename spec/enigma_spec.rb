@@ -5,8 +5,7 @@ RSpec.describe Enigma do
     it 'exists' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
-      decrypt = Decryption.new(encrypt.message_encrypted, offset)
-      enigma = Enigma.new('./message.txt', offset, encrypt, decrypt)
+      enigma = Enigma.new(encrypt, offset)
 
       expect(enigma).to be_an_instance_of(Enigma)
     end
@@ -14,24 +13,31 @@ RSpec.describe Enigma do
     it 'has attributes' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
-      decrypt = Decryption.new(encrypt.message_encrypted, offset)
-      enigma = Enigma.new('./message.txt', offset, encrypt, decrypt)
+      enigma = Enigma.new(encrypt, offset)
 
-      expected = ['m', 'a', 't', 't', ' ', 'r', 'y', 'a', 'n']
-
-      expect(enigma.file_path).to eq('./message.txt')
       expect(enigma.offset).to be_an_instance_of(Offset)
       expect(enigma.encryption).to be_an_instance_of(Encryption)
-      expect(enigma.message).to eq(expected)
+      expect(enigma.decryption).to be_an_instance_of(Decryption)
+    end
+
+    it 'can be instantiated without an offset object' do
+      encrypt = Encryption.new("Matt Ryan")
+      enigma = Enigma.new(encrypt)
+
+      expect(enigma.offset).to be_an_instance_of(Offset)
+      expect(enigma.encryption).to be_an_instance_of(Encryption)
       expect(enigma.decryption).to be_an_instance_of(Decryption)
     end
   end
 
   context 'methods' do
     xit 'can read files' do
-      enigma = Enigma.new('./message.txt')
+      offset = Offset.new("02345", "110621")
+      encrypt = Encryption.new("Matt Ryan", offset)
+      decrypt = Decryption.new(encrypt.message_encrypted, offset)
+      enigma = Enigma.new(offset, encrypt, decrypt)
 
-      expected = "Matt Ryan\n"
+      expected = "matt ryan"
 
       expect(enigma.message).to eq(expected)
     end
@@ -39,8 +45,7 @@ RSpec.describe Enigma do
     it 'can show encrypted text and key/date' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
-      decrypt = Decryption.new(encrypt.message_encrypted, offset)
-      enigma = Enigma.new('./message.txt', offset, encrypt, decrypt)
+      enigma = Enigma.new(encrypt, offset)
 
       expected = {
         encryption: 'tcdlgtitu',
@@ -54,8 +59,7 @@ RSpec.describe Enigma do
     it 'can show decrypted text and key/date' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
-      decrypt = Decryption.new(encrypt.message_encrypted, offset)
-      enigma = Enigma.new('./message.txt', offset, encrypt, decrypt)
+      enigma = Enigma.new(encrypt, offset)
 
       expected = {
         decryption: 'matt ryan',
