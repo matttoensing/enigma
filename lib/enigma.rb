@@ -4,10 +4,10 @@ class Enigma
               :encryption,
               :decryption
 
-  def initialize(encryption, offset = Offset.new)
+  def initialize(encryption, decryption, offset = Offset.new)
     @offset = offset
     @encryption = encryption
-    @decryption = Decryption.new(encrypt[:encryption], @offset)
+    @decryption = decryption
   end
 
   # def message_from_file
@@ -26,7 +26,7 @@ class Enigma
 
   def decrypt(message = encrypt[:encryption], key = @offset.key, date = @offset.date)
     {
-      decryption: @decryption.decrypt,
+      decryption: @decryption.message_decrypted,
       key: key,
       date: date
     }
