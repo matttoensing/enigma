@@ -16,14 +16,17 @@ RSpec.describe Offset do
       expect(offset.date).to eq("110621")
     end
 
+    # stub out random generator method
+    # pick a random number
+    # stub out random function before calling offset.new
     it 'has methods for default attributes' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
+
       offset = Offset.new
-      allow(offset).to receive(:key).and_return("02345")
-      allow(offset).to receive(:date).and_return("130621")
 
       expect(offset.key).to eq("02345")
       expect(offset.date).to eq("130621")
-      expect(offset.random_number_generator.length).to eq(5)
     end
   end
 
@@ -32,13 +35,6 @@ RSpec.describe Offset do
       offset = Offset.new("02345", "110621")
 
       expect(offset.square_date).to eq(12237005641)
-    end
-
-    xit 'can square the default date' do
-      offset = Offset.new
-      allow(offset).to receive(:date).and_return("120621")
-
-      expect(offset.square_date).to eq(17061845641)
     end
 
     it 'can take the last 4 digits of the square date number' do
@@ -53,15 +49,7 @@ RSpec.describe Offset do
       expected = ["0", "2", "3", "4", "5"]
 
       expect(offset.grouped_key).to eq(expected)
-    end
-
-    xit 'can convert the default key into a collection' do
-      offset = Offset.new
-      allow(offset).to receive(:key).and_return("02345")
-
-      expected = ["0", "2", "3", "4", "5"]
-
-      expect(offset.grouped_key).to eq(expected)
+      expect(offset.grouped_key.length).to eq(5)
     end
 
     it 'can create the A key' do
@@ -84,6 +72,74 @@ RSpec.describe Offset do
 
     it 'can create the D key' do
       offset = Offset.new("02345", "110621")
+
+      expect(offset.d_key).to eq(19)
+    end
+  end
+
+  context 'testing random number and date' do
+
+    it 'can square the default date' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+
+      offset = Offset.new
+
+      expect(offset.square_date).to eq(17061845641)
+    end
+
+    it 'can remove the last four numbers of the squared date' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+
+      offset = Offset.new
+
+      expected = [5, 6, 4, 1]
+
+      expect(offset.last_four_digits).to eq(expected)
+    end
+
+    it 'can convert the default key into a collection' do
+      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
+
+      offset = Offset.new
+
+      expected = ["0", "2", "3", "4", "5"]
+
+      expect(offset.grouped_key).to eq(expected)
+      expect(offset.grouped_key.length).to eq(5)
+    end
+
+    it 'can create the A key' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
+
+      offset = Offset.new
+
+      expect(offset.a_key).to eq(7)
+    end
+
+    it 'can create the B key' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
+
+      offset = Offset.new
+
+      expect(offset.b_key).to eq(2)
+    end
+
+    it 'can create the C key' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
+
+      offset = Offset.new
+
+      expect(offset.c_key).to eq(11)
+    end
+
+    it 'can create the D key' do
+      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
+      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
+
+      offset = Offset.new
 
       expect(offset.d_key).to eq(19)
     end
