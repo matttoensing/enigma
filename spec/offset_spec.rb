@@ -52,28 +52,13 @@ RSpec.describe Offset do
       expect(offset.grouped_key.length).to eq(5)
     end
 
-    it 'can create the A key' do
+    it 'can create the keys based on index' do
       offset = Offset.new("02345", "110621")
 
-      expect(offset.a_key).to eq(7)
-    end
-
-    it 'can create the B key' do
-      offset = Offset.new("02345", "110621")
-
-      expect(offset.b_key).to eq(2)
-    end
-
-    it 'can create the C key' do
-      offset = Offset.new("02345", "110621")
-
-      expect(offset.c_key).to eq(11)
-    end
-
-    it 'can create the D key' do
-      offset = Offset.new("02345", "110621")
-
-      expect(offset.d_key).to eq(19)
+      expect(offset.get_key(0)).to eq(7)
+      expect(offset.get_key(1)).to eq(2)
+      expect(offset.get_key(2)).to eq(11)
+      expect(offset.get_key(3)).to eq(19)
     end
   end
 
@@ -108,40 +93,16 @@ RSpec.describe Offset do
       expect(offset.grouped_key.length).to eq(5)
     end
 
-    it 'can create the A key' do
+    it 'can create keys based on an index' do
       allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
       allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
 
       offset = Offset.new
 
-      expect(offset.a_key).to eq(7)
-    end
-
-    it 'can create the B key' do
-      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
-      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
-
-      offset = Offset.new
-
-      expect(offset.b_key).to eq(2)
-    end
-
-    it 'can create the C key' do
-      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
-      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
-
-      offset = Offset.new
-
-      expect(offset.c_key).to eq(11)
-    end
-
-    it 'can create the D key' do
-      allow_any_instance_of(Offset).to receive(:todays_date).and_return("130621")
-      allow_any_instance_of(Offset).to receive(:random_number_generator).and_return("02345")
-
-      offset = Offset.new
-
-      expect(offset.d_key).to eq(19)
+      expect(offset.get_key(0)).to eq(7)
+      expect(offset.get_key(1)).to eq(2)
+      expect(offset.get_key(2)).to eq(11)
+      expect(offset.get_key(3)).to eq(19)
     end
   end
 end
