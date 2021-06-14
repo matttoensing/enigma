@@ -26,7 +26,7 @@ class Enigma
 
   def decrypt(message = encrypt[:encryption], key = @offset.key, date = @offset.date)
     {
-      decryption: @decryption.message_decrypted,
+      decryption: @decryption.decrypt,
       key: key,
       date: date
     }
