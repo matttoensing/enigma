@@ -10,12 +10,6 @@ class Enigma
     @decryption = decryption
   end
 
-  # def message_from_file
-  #   holder = File.open(ARGV[0], 'r')
-  #   incoming_message = holder.read
-  #   holder.close
-  # end
-
   def encrypt(message = @encryption.message, key = @offset.key, date = @offset.date)
     {
       encryption: @encryption.message_encrypted.strip,
