@@ -60,7 +60,7 @@ RSpec.describe Decryption do
       offset = Offset.new("02345", "110621")
       decrypt = Decryption.new('tcdlgtitu', offset)
 
-      expected = "matt ryan"
+      expected = ["m", "a", "t", "t", " ", "r", "y", "a", "n"]
 
       expect(decrypt.decrypt).to eq(expected)
     end
@@ -69,9 +69,18 @@ RSpec.describe Decryption do
       offset = Offset.new("02345", "110621")
       decrypt = Decryption.new("ogwdvbggyno!", offset)
 
-      expected = "hello world!"
+      expected = ["h", "e", "l", "l", "o", " ", "w", "o", "r", "l", "d", "!"]
 
       expect(decrypt.decrypt).to eq(expected)
+    end
+
+    it 'can join decrypted message into a string' do
+      offset = Offset.new("02345", "110621")
+      decrypt = Decryption.new("ogwdvbggyno!", offset)
+
+      expected = "hello world!"
+
+      expect(decrypt.message_decrypted).to eq(expected)
     end
   end
 end
