@@ -1,10 +1,19 @@
+require 'date'
 
 class Offset
   attr_reader :key, :date
 
-  def initialize(key, date)
+  def initialize(key = random_number_generator, date = todays_date)
     @key = key
     @date = date
+  end
+
+  def random_number_generator
+    (("0".."9").to_a * 5).sample(5).join
+  end
+
+  def todays_date
+    Date.today.strftime("%d%m%y")
   end
 
   def square_date
