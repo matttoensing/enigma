@@ -41,7 +41,7 @@ RSpec.describe Encryption do
       expect(encrypt.shift(2)).to eq(expected)
     end
 
-    it 'can create a new index to select a chara character for elements' do
+    it 'can create a new index to select a character for elements' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
 
