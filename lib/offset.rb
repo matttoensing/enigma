@@ -10,7 +10,9 @@ class Offset
   # pick a random number from 0- 99999 and stub test before calling offset.new
   # do the same with date and stub before calling Date.new
   def random_number_generator
-    rand(0..99999).to_s.rjust(0)
+    rand_num = rand(0..99999).to_s.rjust(0)
+    return '0%o' % rand_num if rand_num.length == 4
+    rand_num
   end
 
   def todays_date
