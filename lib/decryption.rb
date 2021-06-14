@@ -47,10 +47,6 @@ class Decryption
         end
       end
     end
-    array
-  end
-
-  def message_decrypted
-    decrypt.join
+    array.join
   end
 end
