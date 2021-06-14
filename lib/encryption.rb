@@ -2,7 +2,7 @@
 class Encryption
   attr_reader :message, :offset, :elements
 
-  def initialize(message, offset)
+  def initialize(message, offset = Offset.new)
     @message = message.downcase.chars
     @offset = offset
     @elements = ("a".."z").to_a << " "
