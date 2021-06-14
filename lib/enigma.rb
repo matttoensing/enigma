@@ -1,23 +1,34 @@
 
 class Enigma
-  attr_reader :file_path
+  attr_reader :offset,
+              :encryption,
+              :decryption
 
-  def initialize(file_path)
-    @file_path = file_path
-    @offset = Offset.new("02345", "110621")
-    @encryption = Encryption.new(message, @offset)
+  def initialize(encryption, decryption, offset = Offset.new)
+    @offset = offset
+    @encryption = encryption
+    @decryption = decryption
   end
 
-  def message
-    holder = File.open(@file_path)
-    incoming_message = holder.read
-  end
+  # def message_from_file
+  #   holder = File.open(ARGV[0], 'r')
+  #   incoming_message = holder.read
+  #   holder.close
+  # end
 
-  def encrypt
+  def encrypt(message = @encryption.message, key = @offset.key, date = @offset.date)
     {
       encryption: @encryption.message_encrypted.strip,
-      key: @offset.key,
-      date: @offset.date
+      key: key,
+      date: date
+    }
+  end
+
+  def decrypt(message = encrypt[:encryption], key = @offset.key, date = @offset.date)
+    {
+      decryption: @decryption.message_decrypted,
+      key: key,
+      date: date
     }
   end
 end
