@@ -20,7 +20,7 @@ class Enigma
     holder.close
   end
 
-  def encrypt(message = @message, key = @offset.key, date = @offset.date)
+  def encrypt(message = @encryption.message, key = @offset.key, date = @offset.date)
     {
       encryption: @encryption.message_encrypted.strip,
       key: key,
