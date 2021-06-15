@@ -24,13 +24,13 @@ class Encryption
 
   def character(index1, index2)
     if index1 == 0
-      @elements[update(index2, offset.get_key(index1))]
+      @elements[update(index2, @offset.get_key(index1))]
     elsif index1 == 1
-      @elements[update(index2, offset.get_key(index1))]
+      @elements[update(index2, @offset.get_key(index1))]
     elsif index1 == 2
-      @elements[update(index2, offset.get_key(index1))]
+      @elements[update(index2, @offset.get_key(index1))]
     elsif index1 == 3
-      @elements[update(index2, offset.get_key(index1))]
+      @elements[update(index2, @offset.get_key(index1))]
     end
   end
 
