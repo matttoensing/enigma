@@ -15,4 +15,5 @@ enigma = Enigma.new(encrypt, decrypt, offset)
 writer = File.open(ARGV[1], 'w')
 writer.write(decrypt.message_decrypted)
 writer.close
+
 puts "Created #{ARGV[1]} with the key #{offset.key} and #{offset.date}"
