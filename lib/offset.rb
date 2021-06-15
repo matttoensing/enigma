@@ -10,7 +10,9 @@ class Offset
   # pick a random number from 0- 99999 and stub test before calling offset.new
   # do the same with date and stub before calling Date.new
   def random_number_generator
-    rand(0..99999).to_s.rjust(0)
+    rand_num = rand(0..99999).to_s.rjust(0)
+    return '0%o' % rand_num if rand_num.length < 4
+    rand_num
   end
 
   def todays_date
@@ -31,41 +33,10 @@ class Offset
     @key.chars
   end
 
-  def a_key
-    num = grouped_key[0..1].join
-    x = num.rjust(0).to_i + last_four_digits[0]
-    return (x % 27) if x > 27
-    x
-  end
-
-  def b_key
-    num = grouped_key[1..2].join
-    x = num.rjust(0).to_i + last_four_digits[1]
-    return (x % 27) if x > 27
-    x
-  end
-
-  def c_key
-    num = grouped_key[2..3].join
-    x = num.rjust(0).to_i + last_four_digits[2]
-    return (x % 27) if x > 27
-    x
-  end
-
-  def d_key
-    num = grouped_key[3..4].join
-    x = num.rjust(0).to_i + last_four_digits[3]
+  def get_key(index)
+    num = grouped_key[index..index + 1].join
+    x = num.rjust(0).to_i + last_four_digits[index]
     return (x % 27) if x > 27
     x
   end
 end
-
-# def get_key(index)
-#   num = grouped_key[index..index + 1].join
-#   x = num.rjust(0).to_i + last_four_digits[index]
-#   return (x % 27) if x > 27
-#   x
-# end
-
-# = (("0".."9").to_a * 5).sample(5)
-# = Time.new.strftime("%d%m%y")

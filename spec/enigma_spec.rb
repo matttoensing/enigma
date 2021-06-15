@@ -24,18 +24,7 @@ RSpec.describe Enigma do
   end
 
   context 'methods' do
-    xit 'can read files' do
-      offset = Offset.new("02345", "110621")
-      encrypt = Encryption.new("Matt Ryan", offset)
-      decrypt = Decryption.new(encrypt.message_encrypted, offset)
-      enigma = Enigma.new(encrypt, decrypt, offset)
-
-      expected = "matt ryan"
-
-      expect(enigma.message).to eq(expected)
-    end
-
-    xit 'can show encrypted text and key/date' do
+    it 'can show encrypted text and key/date' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
       decrypt = Decryption.new(encrypt.message_encrypted, offset)
@@ -50,7 +39,7 @@ RSpec.describe Enigma do
       expect(enigma.encrypt("Matt Ryan", "02345", "110621")).to eq(expected)
     end
 
-    xit 'can show decrypted text and key/date' do
+    it 'can show decrypted text and key/date' do
       offset = Offset.new("02345", "110621")
       encrypt = Encryption.new("Matt Ryan", offset)
       decrypt = Decryption.new(encrypt.message_encrypted, offset)
